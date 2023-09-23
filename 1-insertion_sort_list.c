@@ -1,51 +1,43 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers
- * in ascending order using the Insertion sort algorithm
- * @list: double linked llist
+ * insertion_sort_list - Sorts a doubly linked list of integers in ascending
+ *                       order using the Insertion sort algorithm
+ *
+ * @list: Pointer to a pointer to the head of the list
+ *
+ * Return: Nothing
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *curr, *prevprev, *prevv, *curr1, *currnext;
+listint_t *current, *previous, *next;
 
-	if (list == NULL)
-		return;
+if (list == NULL || *list == NULL || (*list)->next == NULL)
+return;
 
-	curr = *list;
+current = (*list)->next;
+while (current != NULL)
+{
+next = current->next;
+while (current->prev != NULL && current->n < current->prev->n)
+{
+previous = current->prev;
 
-	while (curr)
-	{
-		if (curr->prev && curr->prev->n > curr->n)
-		{
-			/*Store the necessary pointers for swapping*/
-			prevprev = curr->prev->prev;
-			prevv = curr->prev;
-			curr1 = curr;
-			currnext = curr->next;
+previous->next = current->next;
+if (current->next != NULL)
+current->next->prev = previous;
 
-			/* Adjust the pointers to swap the nodes*/
-			prevv->next = currnext;
+current->prev = previous->prev;
+current->next = previous;
 
-			if (currnext)
-				currnext->prev = prevv;
+if (previous->prev != NULL)
+previous->prev->next = current;
+else
+*list = current;
 
-			curr1->prev = prevprev;
-			curr1->next = prevv;
-
-			if (prevprev)
-				prevprev->next = curr1;
-
-			else
-				*list = curr1;
-
-			prevv->prev = curr1;
-			curr = *list;
-			print_list(*list);
-			continue; /*Continue to the next iteration*/
-		}
-		else
-			curr = curr->next;
-	}
+previous->prev = current;
+print_list(*list);
+}
+current = next;
+}
 }
