@@ -6,7 +6,8 @@
  * @b: the second element
  */
 
-void swap(int *a, int *b) {
+void swap(int *a, int *b) 
+{
 int temp = *a;
 *a = *b;
 *b = temp;
@@ -23,7 +24,8 @@ int temp = *a;
  * Return: new index position
  */
 
-int lomuto_partition(int *array, int low, int high) {
+int lomuto_partition(int *array, int low, int high) 
+{
 int pivot = array[high];
 int i = low - 1;
 
@@ -49,7 +51,8 @@ return i + 1;
  * Return: Nothing
  */
 
-void quick_sort_recursive(int *array, int low, int high) {
+void quick_sort_recursive(int *array, int low, int high) 
+{
 if (low < high) {
 int partition_index = lomuto_partition(array, low, high);
 
@@ -74,7 +77,8 @@ quick_sort_recursive(array, partition_index + 1, high);
  * Return: Nothing
  */
 
-void quick_sort(int *array, size_t size) {
+void quick_sort(int *array, size_t size) 
+{
 if (size < 2) {
 return; // Already sorted or empty array
 }
@@ -82,7 +86,14 @@ return; // Already sorted or empty array
 quick_sort_recursive(array, 0, size - 1);
 }
 
-int main() {
+/**
+*  main - This is the main function in the program, where program execution begins.
+*
+* Return: 0.
+*/
+ 
+int main() 
+{
 int arr[] = {4, 7, 2, 1, 8, 5, 9, 3, 6};
 size_t size = sizeof(arr) / sizeof(arr[0]);
 
