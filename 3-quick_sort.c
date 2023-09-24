@@ -1,5 +1,3 @@
-c
-Copy code
 #include <stdio.h>
 
 void swap(int *a, int *b) {
